@@ -116,6 +116,12 @@ cd Desktop/innotrack
 # Si está en otra carpeta, ajusta la ruta
 ```
 
+En **macOS**, también puedes usar la ruta completa de tu usuario:
+
+```bash
+cd /Users/TU_USUARIO/Desktop/innotrack
+```
+
 ### 3.3 Instalar dependencias
 
 ```bash
@@ -129,6 +135,12 @@ npm install
 1. En la carpeta del proyecto, busca el archivo `.env.local.example`
 2. **Crea una copia** llamada `.env.local` (sin el `.example`)
 3. Ábrelo con cualquier editor de texto y reemplaza los valores:
+
+Si estás en **macOS**, puedes crear la copia desde Terminal con:
+
+```bash
+cp .env.local.example .env.local
+```
 
 ```env
 # Supabase (obtenidos en el Paso 1.3)
@@ -151,6 +163,12 @@ EMAIL_REPLY_TO=innovacion@tuempresa.com
 
 ```bash
 npm run dev
+```
+
+En **macOS**, si quieres abrir la app automáticamente en el navegador por defecto:
+
+```bash
+open http://localhost:3000
 ```
 
 Verás algo como:

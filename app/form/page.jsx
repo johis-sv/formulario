@@ -10,16 +10,33 @@ import {
 import { DEPARTMENTS, IMPACT_OPTIONS } from "@/lib/constants";
 
 const fmtDate = (d) => new Date(d).toLocaleDateString("es-EC", { day: "2-digit", month: "long", year: "numeric" });
+const emptyForm = {
+  nombre_iniciativa: "", correo: "", nombre_postulante: "",
+  departamento: "", problema: "", solucion: "", beneficio: "",
+  impacto: [], impacto_otros_texto: "",
+  fecha_iniciativa: new Date().toISOString().split("T")[0],
+  archivos: [],
+};
+
+function Field({ label, required, error, hint, children, num }) {
+  return (
+    <div className="mb-6">
+      <div className="flex items-baseline gap-2 mb-1.5">
+        <span style={{ background: "#1E3A5F", color: "white" }}
+          className="text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{num}</span>
+        <label className="text-sm font-semibold text-slate-700">
+          {label} {required && <span className="text-red-500 ml-0.5">*</span>}
+        </label>
+      </div>
+      {hint && <p className="text-xs text-slate-400 mb-2 ml-8">{hint}</p>}
+      <div className="ml-8">{children}</div>
+      {error && <p className="text-xs text-red-500 mt-1 ml-8 flex items-center gap-1"><AlertTriangle size={12} />{error}</p>}
+    </div>
+  );
+}
 
 export default function FormPage() {
   const router = useRouter();
-  const emptyForm = {
-    nombre_iniciativa: "", correo: "", nombre_postulante: "",
-    departamento: "", problema: "", solucion: "", beneficio: "",
-    impacto: [], impacto_otros_texto: "",
-    fecha_iniciativa: new Date().toISOString().split("T")[0],
-    archivos: [],
-  };
   const [form, setForm]       = useState(emptyForm);
   const [errors, setErrors]   = useState({});
   const [sending, setSending] = useState(false);
@@ -113,22 +130,6 @@ export default function FormPage() {
           </button>
         </div>
       </div>
-    </div>
-  );
-
-  /* ── Form ──────────────────────────────────────────────────────────────── */
-  const Field = ({ label, required, error, hint, children, num }) => (
-    <div className="mb-6">
-      <div className="flex items-baseline gap-2 mb-1.5">
-        <span style={{ background: "#1E3A5F", color: "white" }}
-          className="text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{num}</span>
-        <label className="text-sm font-semibold text-slate-700">
-          {label} {required && <span className="text-red-500 ml-0.5">*</span>}
-        </label>
-      </div>
-      {hint && <p className="text-xs text-slate-400 mb-2 ml-8">{hint}</p>}
-      <div className="ml-8">{children}</div>
-      {error && <p className="text-xs text-red-500 mt-1 ml-8 flex items-center gap-1"><AlertTriangle size={12} />{error}</p>}
     </div>
   );
 
